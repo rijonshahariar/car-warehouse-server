@@ -63,10 +63,12 @@ async function run() {
 
         // Add New Car
         app.post('/cars', async (req, res) => {
-            const newService = req.body;
-            const result = await serviceCollection.insertOne(newService);
+            const newCar = req.body;
+            const result = await serviceCollection.insertOne(newCar);
             res.send(result);
         });
+
+
 
         // Delete Car
         app.delete('/cars/:id', async (req, res) => {
@@ -75,6 +77,7 @@ async function run() {
             const result = await serviceCollection.deleteOne(query);
             res.send(result);
         });
+
 
         // Order Collection API
 
