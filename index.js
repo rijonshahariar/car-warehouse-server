@@ -40,7 +40,7 @@ async function run() {
         app.post('/login', async (req, res) => {
             const user = req.body;
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '1d'
+                expiresIn: '2d'
             });
             res.send({ accessToken });
         })
@@ -94,9 +94,9 @@ async function run() {
         });
 
 
-        // Order Collection API
+        // My Collection API
 
-        app.get('/order', verifyJWT, async (req, res) => {
+        app.get('/mycar', verifyJWT, async (req, res) => {
             const decodedEmail = req.decoded.email;
             const email = req.query.email;
             if (email === decodedEmail) {
@@ -110,7 +110,7 @@ async function run() {
             }
         })
 
-        app.post('/order', async (req, res) => {
+        app.post('/mycar', async (req, res) => {
             const order = req.body;
             const result = await orderCollection.insertOne(order);
             res.send(result);
