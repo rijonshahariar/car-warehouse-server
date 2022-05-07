@@ -68,7 +68,22 @@ async function run() {
             res.send(result);
         });
 
+        // update car
+        app.put('/cars/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedQuantity = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    quantity: updatedQuantity.quantity,
+                    sold: updatedQuantity.sold
+                }
+            };
+            const result = await serviceCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
 
+        })
 
         // Delete Car
         app.delete('/cars/:id', async (req, res) => {
